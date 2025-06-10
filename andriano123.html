@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Caixa</title>
+  <style>
+    .image-container {
+      display: flex;
+      align-items: center;
+    }
+
+    img {
+  display: block;
+  width: 300px;
+  height: auto;
+  margin: 0 auto; /* centraliza horizontalmente */
+}
+
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #3CB371;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      background: linear-gradient(to bottom, #3CB371,) #FFFFFF;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    header {
+      color: black;
+      padding: 20px 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      background: linear-gradient(to bottom, #3CB371, #fffebe);
+      color: rgb(0, 0, 0);
+      padding: 20px;
+    }
+    nav {
+      background-color: #444;
+      overflow: hidden;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    nav a:hover {
+      background-color: #575757;
+    }
+    h2, h3 {
+      color: black;
+    }
+    section {
+      display: none;
+      padding: 20px;
+      margin: 10px 0;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    section.active {
+      display: block;
+    }
+    footer {
+      display: flex;
+      justify-content: flex-start;
+      gap: 40px;
+      padding: 20px;
+      background: white;
+    }
+    .login-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    input {
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>DIGICAIXA</h1>
+    </header>
+    
+    <nav>
+      <a href="javascript:void(0);" onclick="showSection('conceitos')">Conceitos Básicos</a>
+      <a href="javascript:void(0);" onclick="showSection('empresa')">Empresas Parceiras</a>
+    </nav>
+
+    <section id="conceitos" class="active">
+      <h2>Conceitos Básicos</h2>
+      <h3>Introdução</h3>
+      <p>Digicaixa é um site para empresas que desejam entrar ou já atuam no mercado, com um programa simples para realizar vendas, compartilhar bibliotecas de produtos, monitorar funcionários e acompanhar vendas em tempo real.</p>
+      <div class="image-container">
+        <img id="imagem" src="Imagem/123.jpg" alt="">
+      </div>
+    </section>
+
+    <section id="empresa">
+      <h2>Cadastro de Empresa</h2>
+      <p>Aqui você poderá registrar as principais informações da sua organização de forma rápida, segura e eficiente. O processo é simples: informe o CNPJ, a data de criação, o nome da empresa e crie uma senha de acesso. Esses dados permitirão que sua empresa tenha acesso aos nossos serviços e ferramentas exclusivas voltadas ao crescimento e à transformação digital do seu negócio.</p>
+      <div class="login-box">
+        <form method="post" action="http://localhost:8080/cadastrar-empresa" onsubmit="return validarSenhaCadastro()">
+          <input type="text" name="cnpj" placeholder="CNPJ" required oninput="mascaraCNPJ(this)">
+          <input type="text" name="data_criacao" placeholder="Data de Criação" required oninput="mascaraData(this)">
+          <input type="text" name="nome" placeholder="Nome da Empresa" required>
+          <input type="password" id="senhaCadastro" name="senha" placeholder="Criar uma senha" required>
+          <button type="submit">Cadastrar</button>
+        </form>
+        <p id="mensagemCadastro" style="color:red;"></p>
+      </div>
+
+      <h2>Login da Empresa</h2>
+      <p>Faça login com os dados cadastrados para acessar as funcionalidades exclusivas do sistema. Este ambiente é destinado ao gerenciamento das informações da sua empresa de forma segura, prática e centralizada. Caso tenha esquecido sua senha, utilize a opção de recuperação para redefinir seu acesso.</p>
+      <div class="login-box">
+        <form method="post" action="http://localhost:8080/login-empresa" onsubmit="return validarSenhaLogin()">
+          <input type="text" name="nome" placeholder="NOME DA EMPRESA" required>
+          <input type="text" name="cnpj" placeholder="CNPJ" required oninput="mascaraCNPJ(this)">
+          <input type="password" id="senhaLogin" name="senha" placeholder="SENHA" required>
+          <a href="" target="_blank">Esqueci minha senha</a>
+
+          <button type="submit">Login</button>
+
+
+        </form>
+        <p id="mensagemLogin" style="color:red;"></p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-left">
+        <h3>EMPRESA</h3>
+        <h5><a href="#">Construsite</a></h5>
+        <h3>FALE CONOSCO</h3>
+        <h5>TELEFONE: <a href="#">(33) 98848-1813</a><br>EMAIL: <a href="#">construsite.2005@gmail.com</a></h5>
+      </div>
+      <div class="footer-col">
+        <h3>REDES SOCIAIS</h3>
+        <h5><a href="#">Instagram</a><br><a href="#">Facebook</a><br><a href="#">X</a><br><a href="#">YouTube</a><br><a href="#">Tiktok</a></h5>
+      </div>
+      <div class="footer-col">
+        <h3>SUPORTE</h3>
+        <h5>AJUDA: <a href="#">tutorial slide</a></h5>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function mascaraCNPJ(campo) {
+      let v = campo.value.replace(/\D/g, '');
+      v = v.replace(/^(\d{2})(\d)/, '$1.$2');
+      v = v.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+      v = v.replace(/\.(\d{3})(\d)/, '.$1/$2');
+      v = v.replace(/(\d{4})(\d)/, '$1-$2');
+      campo.value = v;
+    }
+
+    function mascaraData(campo) {
+      let v = campo.value.replace(/\D/g, '');
+      if (v.length > 2) v = v.replace(/^(\d{2})(\d)/, '$1/$2');
+      if (v.length > 5) v = v.replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
+      campo.value = v;
+    }
+
+    function validarSenhaCadastro() {
+      const senha = document.getElementById('senhaCadastro').value;
+      const msg = document.getElementById('mensagemCadastro');
+      if (senha.length < 6) {
+        msg.textContent = 'A senha deve conter pelo menos 6 caracteres.';
+        return false;
+      }
+      msg.textContent = '';
+      return true;
+    }
+
+    function validarSenhaLogin() {
+      const senha = document.getElementById('senhaLogin').value;
+      const msg = document.getElementById('mensagemLogin');
+      if (senha.length < 6) {
+        msg.textContent = 'A senha deve conter pelo menos 6 caracteres.';
+        return false;
+      }
+      msg.textContent = '';
+      return true;
+    }
+
+    let imagemAtual = 1;
+    function trocarImagem() {
+      const imagem = document.getElementById("imagem");
+      if (imagemAtual === 1) {
+        imagem.src = "https://drive.google.com/uc?export=view&id=ID_DA_SEGUNDA_IMAGEM";
+        imagemAtual = 2;
+      } else {
+        imagem.src = "https://drive.google.com/uc?export=view&id=1SdB-Xg14pB7hz7W3iB46xI7Q-78cCQMH";
+        imagemAtual = 1;
+      }
+    }
+  </script>
+</body>
+</html>
